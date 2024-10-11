@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Box']
+
+roboflow:
+  workspace: craig-test-workspace
+  project: doorbell-camera-alert
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/craig-test-workspace/doorbell-camera-alert/dataset/4
