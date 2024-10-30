@@ -11,3 +11,7 @@
 * Built a couple API routes to allow for adding cameras to the database, querying the cameras in the database, and viewing the home page.
 
 ### Week 3 (October 21st - 27th)
+N/A
+
+### Week 4 (October 28th - November 3rd)
+* Started working on video module and configuration file generation/parsing for said module
