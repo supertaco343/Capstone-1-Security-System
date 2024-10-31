@@ -11,8 +11,11 @@ BOX_DATA_PATH = os.path.join(
 )
 
 if __name__ == "__main__":
-    # build and save box detection model
+    # build and train model
     box_model = Model(BOX_DATA_PATH)
     box_model.train()
+
+    # save model
+    if not os.path.exists(os.path.join(BASE_DIR, "models")):
+        os.makedirs(os.path.join(BASE_DIR, "models"))
     box_model.save(os.path.join(BASE_DIR, "models", "box_model.pt"))
-    box_model.evaluate()
