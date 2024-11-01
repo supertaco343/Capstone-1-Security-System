@@ -1,11 +1,8 @@
-#this one is used in creating a blank config file for the user/system to use
+#this one is used in creating a blank config file for the user/system to use and a readme
 #current cam id: 0c45:6366, current supported types: MJPG 1920x1080 at 30-5, 1280x720 at 30-5, 
 
 def vidconfiginit():
     with open("vidconfig.txt", "w") as file:
-        file.write("NumberofCameras: 0\nCam0ID: 0000:0000\nTempPath: ./\nTempType: mp4v\nResolution: 0x0\nFrameRate: 15\nTimeLimit: 10\n")
-        
-        
-        
-        #NOTE: this is a template for the config file, please add/change the items here or in the GUI
-    
+        file.write("NumberofCameras: 0\nCamID: 0000:0000\nTempPath: ./\nTempType: mp4v\nResolution: 0x0\nFrameRate: 0\nTimeLimit: 10\n")
+    with open("vidconfig_readme.txt", "w") as file:
+        file.write("This is the readme for the configuration file, please read over this to understand the settings you are changing, and what goes where. \nNumberofCameras: This is the number of cameras you are using in your system, be sure to add the rest of the settings other than this one for each camera. \nCamID: The USB ID that the camera(s) have.  This can be found by running the extra script, currently in 'teststuff.py', and finding your camera(s) in the list. \nTempPath: The path for the videomodule to save the temporary files at awaiting use by the main system, leave blank for the default choice of inside the directory in which the program is in. \nTempType: The file type the temp video will be saved as, make sure your camera will support that file type.  You can check this (and the supported resolution/frame rate for different types by running the command 'uvcdynctrl -f' in terminal. \nResolution: The resolution you wish the video to be saved/viewed as.  Make sure it is supported (like above). \nFrameRate: The frame rate at which the video can be recorded/viewed as.  Make sure it is supported (like above). \nTimeLimit: The max time (in seconds) that each temp video will be created as.  Smaller sizes (5-15 seconds) are recommended, larger sizes may increase memory and storage usage. \n")
