@@ -1,5 +1,6 @@
 from app import app, db
 from app.models import Camera, Recording
+from app.alert import send_email
 from flask import request, jsonify
 
 # define the route for the root of the site
@@ -34,3 +35,16 @@ def get_cameras():
         camera_list.append({"id": camera.id, "name": camera.name, "location": camera.location})
     
     return jsonify(camera_list)
+
+# define route for alerting user of delivery
+@app.route("/alert", methods=["POST"])
+def alert_user():
+    # get the data from the request
+    data = request.get_json()
+    recipient = data["recipient"]
+
+    # send the email
+    # Could receive more data to specify where the package is.
+    send_email(recipient, "Delivery Alert", "You have a delivery waiting for you")
+
+    return jsonify({"message": "Alert sent successfully"})
