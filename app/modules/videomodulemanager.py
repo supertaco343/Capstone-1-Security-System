@@ -31,14 +31,10 @@ def vidmodman():
         print("ERROR, NUMBER OF SETTINGS IS INCORRECT, CHECK CONFIG")
         return 1
     
+    thread = CameraThread(CameraSettings[0], CameraSettings[1], CameraSettings[2], CameraSettings[3], CameraSettings[4], CameraSettings[5])
+    thread.start()
     #from config, setup each camera and link it properly/spawn a thread for it, find any that are not working/gone, and report to user if there is an issue
     #NOTE: the threading part of this is partially taken (and changed to fit) from: https://stackoverflow.com/questions/29664399/capturing-video-from-two-cameras-in-opencv-at-once
     
-    
-
-
-
-
-
 
 vidmodman()
