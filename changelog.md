@@ -15,3 +15,5 @@ N/A
 
 ### Week 4 (October 28th - November 3rd)
 * Started working on video module and configuration file generation/parsing for said module
+* Finished config and readme generation files
+* Finished a test version of both the module and the manager for the module (currently not working in VM due to possible USB driver issues, camera will turn on, but will not display anything)
