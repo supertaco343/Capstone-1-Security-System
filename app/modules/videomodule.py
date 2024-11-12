@@ -8,11 +8,10 @@ def CameraRecord(CamID, TempPath, TempType, Resolution, FrameRate, TimeLimit):
     
     cam.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(TempType[0], TempType[1], TempType[2], TempType[3]))
     cam.set(cv2.CAP_PROP_FPS, int(FrameRate))
-    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-    
     Res = (int(Resolution.split("x")[0]), int(Resolution.split("x")[1]))
     print(Res[0], Res[1])
+    cam.set(cv2.CAP_PROP_FRAME_WIDTH, Res[0])
+    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, Res[1])
     frame_width = int(cam.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cam.get(cv2.CAP_PROP_FRAME_HEIGHT))
     print(frame_width, frame_height) #this is to check to make sure it is the correct size (prints what is in the config, and what is currently set)
