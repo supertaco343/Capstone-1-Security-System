@@ -17,3 +17,10 @@ N/A
 * Started working on video module and configuration file generation/parsing for said module
 * Finished config and readme generation files
 * Finished a test version of both the module and the manager for the module (currently not working in VM due to possible USB driver issues, camera will turn on, but will not display anything)
+
+### Week 5 (November 4th - November 10th)
+* Use on all in one pc's works and above test works mostly.  AIO pc's have been distributed to group memebers to allow for consistent testing
+* Found bug in video module where output file is not created properly (or at all), and settings were ignored by CV2 that are set
+
+### Week 6 (November 11th - November 17th)
+* Partially fixed bug in VM, output file needs to be created based on settings still, will be changed to automatically do this
