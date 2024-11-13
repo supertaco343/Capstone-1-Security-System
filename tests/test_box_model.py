@@ -8,7 +8,7 @@ from model import Model
 
 BASE_DIR = os.path.dirname(__file__)
 
-MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "box_model.pt")
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "package.pt")
 IMG_PATH = os.path.join(BASE_DIR, "images", "test.jpg")
 
 box_model = Model(None, MODEL_PATH)
