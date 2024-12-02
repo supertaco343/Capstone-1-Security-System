@@ -1,7 +1,29 @@
 from app import app, db
 from app.models import Camera, Recording
-from app.alert import send_email
-from flask import request, jsonify
+from flask import request, jsonify, Response
+import cv2
+from app.detect import detect_package
+import threading
+from ultralytics import YOLO
+
+def generate_feed(camera_id):
+    cap = cv2.VideoCapture(camera_id)
+
+    if not cap.isOpened():
+        raise RuntimeError("Could not start camera.")
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        # Encode the frame as JPEG
+        _, buffer = cv2.imencode('.jpg', frame)
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n')
+
+    cap.release()
 
 # define the route for the root of the site
 @app.route("/")
@@ -36,15 +58,31 @@ def get_cameras():
     
     return jsonify(camera_list)
 
-# define route for alerting user of delivery
-@app.route("/alert", methods=["POST"])
-def alert_user():
-    # get the data from the request
-    data = request.get_json()
-    recipient = data["recipient"]
+# define the route for deleting a camera
+@app.route("/camera/<int:id>", methods=["DELETE"])
+def delete_camera(id):
+    # get the camera from the database
+    camera = Camera.query.get(id)
+    
+    # delete the camera from the database
+    db.session.delete(camera)
+    db.session.commit()
+    
+    return jsonify({"message": "Camera deleted successfully"})
 
-    # send the email
-    # Could receive more data to specify where the package is.
-    send_email(recipient, "Delivery Alert", "You have a delivery waiting for you")
+# define the route for viewing a camera
+@app.route('/live_feed/<camera_id>')
+def live_feed(camera_id):
+    return Response(generate_feed(int(camera_id)),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
-    return jsonify({"message": "Alert sent successfully"})
+# define the route for starting detection
+@app.route('/detect')
+def detect():
+    cameras = Camera.query.all()
+    model = YOLO("models/package.pt")
+    for camera in cameras:
+        thread = threading.Thread(target=detect_package, args=(model, int(camera.id), app.config["MAIL_USERNAME"]))
+        thread.start()
+    return jsonify({"message": "Detection started for all cameras"})
+
