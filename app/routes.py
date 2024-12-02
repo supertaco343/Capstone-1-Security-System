@@ -25,11 +25,6 @@ def generate_feed(camera_id):
 
     cap.release()
 
-# define the route for the root of the site
-@app.route("/")
-def index():
-    return "Hello, World!"
-
 # define the route for adding a new camera
 @app.route("/camera", methods=["POST"])
 def add_camera():
@@ -70,7 +65,7 @@ def delete_camera(id):
     
     return jsonify({"message": "Camera deleted successfully"})
 
-# TODO: add a way to view all recordings for a camera
+# TODO: write an html form to view all recorded frames for a camera
 # define the route for getting all recordings for a camera
 @app.route("/recording/<int:camera_id>", methods=["GET"])
 def get_recordings(camera_id):
@@ -85,9 +80,9 @@ def get_recordings(camera_id):
     return jsonify(recording_list)
 
 # define the route for viewing a camera
-@app.route('/live_feed/<camera_id>')
+@app.route('/live_feed/<int:camera_id>')
 def live_feed(camera_id):
-    return Response(generate_feed(int(camera_id)),
+    return Response(generate_feed(camera_id),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # define the route for starting detection
@@ -99,4 +94,3 @@ def detect():
         thread = threading.Thread(target=detect_package, args=(model, int(camera.id), app.config["MAIL_USERNAME"]))
         thread.start()
     return jsonify({"message": "Detection started for all cameras"})
-
