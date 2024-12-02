@@ -70,6 +70,20 @@ def delete_camera(id):
     
     return jsonify({"message": "Camera deleted successfully"})
 
+# TODO: add a way to view all recordings for a camera
+# define the route for getting all recordings for a camera
+@app.route("/recording/<int:camera_id>", methods=["GET"])
+def get_recordings(camera_id):
+    # get all the recordings for the camera from the database
+    recordings = Recording.query.filter_by(camera_id=camera_id).all()
+    
+    # create a list of recordings
+    recording_list = []
+    for recording in recordings:
+        recording_list.append({"id": recording.id, "camera_id": recording.camera_id, "timestamp": recording.timestamp, "file_path": recording.file_path})
+    
+    return jsonify(recording_list)
+
 # define the route for viewing a camera
 @app.route('/live_feed/<camera_id>')
 def live_feed(camera_id):

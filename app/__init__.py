@@ -2,9 +2,6 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
-import threading
-from ultralytics import YOLO
-from ultralytics import YOLO
 
 # Initialize the Flask app
 app = Flask(__name__)
