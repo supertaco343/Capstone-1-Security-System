@@ -57,7 +57,6 @@ def detect_package(model, camera_id, alert_email):
                     # Check if it's time to send an alert
                     if can_send_alert(last_alert_time):
                         send_email(alert_email, "Delivery Alert", "You have a delivery waiting for you")
-                        save_frame
                         last_alert_time = datetime.now()
                     
                     # Stop processing other boxes if a package is detected

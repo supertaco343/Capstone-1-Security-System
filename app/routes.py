@@ -91,6 +91,6 @@ def detect():
     cameras = Camera.query.all()
     model = YOLO("models/package.pt")
     for camera in cameras:
-        thread = threading.Thread(target=detect_package, args=(model, int(camera.id), app.config["MAIL_USERNAME"]))
+        thread = threading.Thread(target=detect_package, args=(model, int(camera.id), app.config["USER_EMAIL"]))
         thread.start()
     return jsonify({"message": "Detection started for all cameras"})
