@@ -23,16 +23,16 @@ This is a fully self-hosted home/business security system that can use low cost 
 git clone https://github.com/supertaco343/Capstone-1-Security-System.git  
 cd Capstone-1-Security-System
 ```
-3. Install Dependencies:
+2. Install Dependencies:
 ```
 pip install -r requirements.txt
 ```
-5. Create initial configuration file:
+3. Create initial configuration file:
 ```
 cd app/modules
 python3 videomodulemanager.py
 ```
-6. Find your camera(s) info:
+4. Find your camera(s) info:
 ```
 python3 teststuff.py
 python3 test2.py
@@ -43,16 +43,16 @@ The second command will show what OpenCV (one of the packages used) sees in term
 The third command will show ALL camera formats, resolutions, and frame rate supported by that camera.  
 All 3 are needed for multi camera systems, you can skip the second command if you are only using 1 camera (as you do not need to worry about which camera is which).  
 
-7. Modify the config file:
+5. Modify the config file:
 
 You can open the config readme that is generated when first running the command in step 5 to learn more about the config itself (named "vidconfig_readme.txt").  
 After reading it, you can change the config settings (found in "vidconfig.txt") based on the info you obtained on step 6.  The "CamID" is found in the first command of step 7, and the "Resolution" and "Framerate" are found in the third command of step 6.  If you are running multiple cameras, you must put the config data in order in which the cameras show up to OpenCV, and this is found in the second command of step 6.
 
-8. Testing the camera setup (optional):
+6. Testing the camera setup (optional):
 
 After saving the config changes, you can run the second command in step 5 to open up the camera feed(s) you have entered into the config file.  Please adjust config settings if there are issues (the config is very case and space sensitive, so that might be the first thing to check before further investigation).  You can exit the video feed once you have confirmed the cameras are working.  
 
-9. Running the program:
+7. Running the program:
 
 After setting the cameras up, you can go back to the root directory of the project and run the program
 ```
